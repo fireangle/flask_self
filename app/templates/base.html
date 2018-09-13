@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {{nav.top.render()}}
+    {{nav.mybar.render()}}
 {% endblock %}
 
 {% block content %}
@@ -17,5 +17,6 @@
     <div class="page-header">
         <h1>你好，么么哒</h1>
     </div>
+    {{wtf.quick_form(form)}}
 </div>
 {% endblock %}
