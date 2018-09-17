@@ -1,0 +1,6 @@
+{{user.username}}小可爱你好，
+    感谢注册。
+    请点击以下链接激活你的账户：
+    {{url_for('auth.confirm',token=token,_external=True)}}
+
+    fireangle团队

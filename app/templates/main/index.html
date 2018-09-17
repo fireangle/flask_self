@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base1.html" %}
 
 {% block title %}fireangle{% endblock %}
 
@@ -8,6 +8,10 @@
     <div class="page-header">
         <h1>你好，么么哒</h1>
     </div>
-    {{wtf.quick_form(form)}}
+    {% if current_user.is_authenticated %}
+        {{current_user.username}}，你个死鬼～
+    {% else %}
+        么么哒
+    {% endif %}
 </div>
 {% endblock %}
