@@ -4,7 +4,7 @@ from flask import render_template,redirect,url_for,request,flash
 from ..models import User
 from flask_login import login_user,login_required,logout_user,current_user
 from app import db
-from ..email import send_email,send_async_email
+from ..email import send_email
 
 
 @auth.route('/login',methods=['GET','POST'])
@@ -56,8 +56,9 @@ def confirm(token):
 @auth.before_app_request
 def before_request():
     if current_user.is_authenticated \
-            and not current_user.confiremed \
-            and request.endpoint[:5] !='auth.' \
+            and not current_user.confirmed \
+            and request.endpoint \
+            and request.blueprint != 'auth' \
             and request.endpoint != 'static':
         return redirect(url_for('auth.unconfirmed'))
 
@@ -69,7 +70,7 @@ def unconfirmed():
 
 @auth.route('/confirm')
 @login_required
-def resend_conformation():
+def resend_confirmation():
     token = current_user.generate_confirmation_token()
     send_email(current_user.email, '确认账号', 'auth/email/confirm',
                user=current_user, token=token)
