@@ -44,7 +44,6 @@ def create_app(config_name):
     moment.init_app(app)
     login_manager.init_app(app)
 
-    from .navbar import navigation
-    navigation.init_app(app)
+
 
     return app
