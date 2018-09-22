@@ -1,5 +1,18 @@
 {% extends "bootstrap/base.html" %}
+{% import  "bootstrap/wtf.html" as wtf %}
 
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='1.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='1.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  {{moment.include_moment()}}
+  {{ moment.lang("zh-CN") }}
+{% endblock %}
 
 {% block styles %}
     {{super()}}
@@ -72,7 +85,13 @@
 
 
           {% if current_user.is_authenticated %}
-            <li><a href="{{url_for('main.user',username=current_user.username)}}">主页</a> </li>
+            <li>
+
+              <a href="{{url_for('main.user',username=current_user.username)}}"
+                 class="img-circle">
+                <img src="{{ current_user.gravatar(size=14) }}"> 主页
+              </a>
+            </li>
             <li><a href="{{url_for('auth.logout')}}">退出</a> </li>
           {% else %}
             <li><a href="{{url_for('auth.login')}}">登录</a> </li>
